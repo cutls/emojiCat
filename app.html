@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="ja">
+
+<head>
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1, minimum-scale=0.5, maximum-scale=1, user-scalable=yes">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons" rel="stylesheet">
+    <meta charset="utf-8">
+    <title></title>
+    <link href="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.min.css" rel="stylesheet">
+    <link href="master.css" rel="stylesheet">
+</head>
+
+<body>
+    <div id="app" style="width:100vw; height:100vh; padding:10px;">
+        <v-content>
+            <div style="text-align: center">
+                {{error}}
+                <h1>{{name}}</h1>
+                <p>System: Cutls (Vue/Vuetify|PHP/Klein)</p>
+                <p>あと{{nokori}}個</p>
+            </div>
+            <v-container fluid fill-height>
+                <v-layout align-center justify-center>
+                    <template v-if="user">
+                        <v-flex xs12 sm8 md4>
+                            <template v-if="question">
+                                <v-layout row wrap>
+                                    <v-flex sm6 class="text-xs-right pad">
+                                        <img :src="data.image" class="emoji">
+                                    </v-flex>
+                                    <v-flex sm6 class="pad">
+                                        <div class="sc">{{data.shortcode}}</div>
+                                    </v-flex>
+                                    <v-flex sm12 class="pad">
+                                        <v-form class="text-xs-center">
+                                            <v-select :items="cats" label="カテゴリ" v-model="selCat"></v-select>
+                                            <v-btn large dark color="indigo" v-on:click="post()">決定</v-btn>
+                                        </v-form>
+                                        <v-btn large dark color="pink darken-4" v-on:click="next()">スキップ</v-btn><br>
+                                        {{count}}個目
+                                    </v-flex>
+                                </v-layout>
+                            </template>
+                            <template v-else>
+                                <p>10個の絵文字が順番に出てくるのでいい感じのカテゴリを選んでください。</p>
+                                <p>画像の切り替わりにしばらく時間がかかります。</p>
+                                <v-btn large dark color="cyan darken-4" v-on:click="start">スタート</v-btn>
+                            </template>
+                        </v-flex>
+                    </template>
+                    <template v-else>
+                        <p>まずはアスタルテ(kirishima.cloud)にログイン</p>
+                        <v-btn large dark color="green darken-4" v-on:click="login">Login</v-btn>
+                    </template>
+                </v-layout>
+            </v-container>
+
+        </v-content>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.js"></script>
+    <script src="config.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>
